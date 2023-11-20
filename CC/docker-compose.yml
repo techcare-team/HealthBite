@@ -1,0 +1,35 @@
+version: "3"
+services:
+  backend:
+    container_name: healthbite-api
+    volumes:
+      - "./backend:/app"
+      - "./backend/node_modules:/app/node_modules"
+    environment:
+      - PORT_APP=5000
+    ports:
+      - 3000:5000
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    networks:
+      - be-network
+    restart: always
+    command: npm run start:dev
+  db:
+    container_name: mysql-db
+    volumes:
+      - "healthbite-db:/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1231
+      - MYSQL_USER=resanata
+      - MYSQL_DATABASE=healthbite
+    image: mysql:5.7
+    networks:
+      - be-network
+volumes:
+  healthbite-db:
+networks:
+  be-network:
+    name: backend-services-network
+    driver: bridge
