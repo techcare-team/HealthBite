@@ -97,9 +97,24 @@ const createProfileAndNutrition = async (req, res) => {
 }
 
 //UPDATE Profile
-
+const updateProfile = async (req, res) => {
+    try{
+        const { profile_id } = req.body;
+        const payload = req.body;
+        await ProfileService.updateProfile(profile_id, {...payload});
+        res.status(200).json({
+            message: 'profile updated'
+        })
+    } catch(err){
+        res.status(500).json({
+            message: 'Server error',
+            serverMessage: err.message
+        })
+    }
+};
 
 module.exports = {
     getHomeProfile,
-    createProfileAndNutrition
+    createProfileAndNutrition,
+    updateProfile
 }

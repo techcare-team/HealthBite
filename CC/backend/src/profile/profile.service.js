@@ -4,6 +4,7 @@ const { AgeFromDateString } = require('age-calculator');
 // GET
 const getHomeProfile = async (account_id) => {
     const dataProfile = await ProfileModel.findProfile(account_id)
+    console.log({dataProfile});
 
     if(!dataProfile){
         throw Error("Profile is not exist")
@@ -21,6 +22,41 @@ const getHomeProfile = async (account_id) => {
 
 // PUT/UPDATE
 //UPDATE Profile
+const updateProfile = async (account_id,{
+    name,
+    gender,
+    date_of_birth,
+    height,
+    weight,
+    goal_id,
+    diabetes,
+    blood_sugar_value,
+    hypertension,
+    blood_pressure_value,
+    heart_disease,
+    total_cholesterol_value
+}) => {
+    const userProfile = await ProfileModel.findProfile(account_id);
+
+    if(!userProfile) {
+        throw new Error('Profile is not exists');
+    };
+
+    await ProfileModel.updateProfile(account_id, {
+        name,
+        gender,
+        blood_pressure_value,
+        blood_sugar_value,
+        date_of_birth,
+        diabetes,
+        goal_id,
+        heart_disease,
+        height,
+        hypertension,
+        total_cholesterol_value,
+        weight
+    });
+}
 
 
 // POST
@@ -155,5 +191,6 @@ const calculateMaxNutritionUser = (
 module.exports = {
     getHomeProfile,
     createProfile,
-    createNutrition
+    createNutrition,
+    updateProfile
 }

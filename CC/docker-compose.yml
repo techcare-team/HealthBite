@@ -22,7 +22,6 @@ services:
       - "healthbite-db:/var/lib/mysql"
     environment:
       - MYSQL_ROOT_PASSWORD=1231
-      - MYSQL_USER=resanata
       - MYSQL_DATABASE=healthbite
     image: mysql:5.7
     networks:

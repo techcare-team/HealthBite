@@ -6,7 +6,7 @@ const profileValidationInput = require("../middleware/profileValidation")
 const router = express.Router()
 
 //Routes
-router.get('/', ProfileController.getHomeProfile)
+router.get('/', ProfileController.getHomeProfile);
 
 router.post('/', profileValidationInput, ProfileController.createProfileAndNutrition)
 
