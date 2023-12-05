@@ -99,9 +99,10 @@ const createProfileAndNutrition = async (req, res) => {
 //UPDATE Profile
 const updateProfile = async (req, res) => {
     try{
-        const { profile_id } = req.body;
+        const { profile_id, date_of_birth } = req.body;
         const payload = req.body;
-        await ProfileService.updateProfile(profile_id, {...payload});
+        const newDate = new Date(date_of_birth).toISOString();
+        await ProfileService.updateProfile(profile_id, {...payload, date_of_birth: newDate});
         res.status(200).json({
             message: 'profile updated'
         })
