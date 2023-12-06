@@ -25,6 +25,6 @@ app.use("/mealplans", accessValidation, MealPlansRoutes)
 
 app.use("/recipes", accessValidation, RecipesRoutes)
 
-app.use("/settings", accessValidation,SettingsRoutes )
+app.use("/settings", accessValidation, SettingsRoutes)
 
 app.listen(PORT, ()=>console.log('listen port ' + PORT))

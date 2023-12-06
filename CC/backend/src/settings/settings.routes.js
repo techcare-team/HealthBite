@@ -1,7 +1,7 @@
 const express = require('express')
 
 //Import Controller
-const SettingsController = require("../profile/profile.controller")
+const ProfileSettingsController = require('./settings.controller');
 
 const router = express.Router()
 
@@ -9,9 +9,9 @@ const router = express.Router()
 
 //GET
 // import function dari controller (contoh: SettingsController.getProfile)
-router.get('/profile', SettingsController.getHomeProfile) 
+router.get('/profile/:profile_id', ProfileSettingsController.getProfileSettings);
 
 //UPDATE
-router.put("/profile", SettingsController.updateProfile);
+router.put('/profile', ProfileSettingsController.updateProfileSettings);
 
 module.exports = router
