@@ -9,6 +9,8 @@ const accessValidation = require("../middleware/accessValidation")
 //Routes
 router.post('/register', AuthController.createAccount)
 router.post('/login', AuthController.loginAccount)
-router.post('/logout', accessValidation, AuthController.logoutAccount)
+// router.post('/logout', accessValidation, AuthController.logoutAccount)
+router.get('/google', AuthController.loginGoogle)
+router.get('/google/callback', AuthController.loginGoogleCallback)
 
 module.exports = router

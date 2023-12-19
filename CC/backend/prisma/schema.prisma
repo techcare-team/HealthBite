@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//User Profile
+
+model Account{
+  account_id String @id @db.VarChar()
+  email String @db.VarChar() @unique
+  password String? @db.VarChar()
+  role String @db.VarChar() @default("user")
+  profile Profile?
+  nutrition Nutrition?
+  meal_plans RecipesOnMealPlans[]
+  recipe_recommendations RecipesOnProfileRecommendations[]
+}
+
+model Profile{
+  profile_id Int @id @default(autoincrement())
+  account Account @relation(fields: [account_id], references: [account_id])
+  account_id String @unique
+  name String? @db.VarChar()
+  gender String? @db.VarChar()
+  date_of_birth DateTime?
+  height Int?
+  weight Int?
+  goal Goal? @relation(fields: [goal_id], references: [goal_id])
+  goal_id Int?
+  profile_photo String?
+  diabetes Boolean?
+  blood_sugar_value Int? 
+  hypertension Boolean?
+  blood_pressure_value Int?
+  heart_disease Boolean?
+  total_cholesterol_value Int?
+}
+
+model Goal{
+  goal_id Int @id @default(autoincrement())
+  goal_name String @db.VarChar() @unique
+  profiles Profile[]
+}
+
+//Nutrition
+
+model Nutrition{
+  nutrition_id Int @id @default(autoincrement())
+  account Account @relation(fields: [account_id], references: [account_id])
+  account_id String @unique
+  calories_value Int @default(0)
+  calories_max_value Int @default(2500)
+  sugar_value Int @default(0)
+  sugar_max_value Int @default(50)
+  cholesterol_value Int @default(0)
+  cholesterol_max_value Int @default(300)
+  natrium_value Int @default(0)
+  natrium_max_value Int @default(2000)
+}
+
+//recipe
+
+model Recipe{
+  recipe_id Int @id @default(autoincrement())
+  recipe_name String @db.VarChar() @unique
+  serving_size String? @db.VarChar()
+  description String 
+  calories_value Int @default(0)
+  sugar_value Int @default(0)
+  cholesterol_value Int @default(0)
+  natrium_value Int @default(0)
+  other_nutrients String[]
+  ingredients String[]
+  detail_ingredients String[]
+  steps String[]
+  recipe_photo String?
+  categories CategoriesOnRecipes[]
+  meal_plans RecipesOnMealPlans[]
+  profile_recommendations RecipesOnProfileRecommendations[]
+}
+
+//Category
+
+model Category{
+  category_id Int @id @default(autoincrement())
+  category_name String @db.VarChar() @unique
+  recipes CategoriesOnRecipes[]
+}
+
+model CategoriesOnRecipes{
+  recipe Recipe @relation(fields: [recipe_id], references: [recipe_id])
+  recipe_id Int
+  category Category @relation(fields: [category_name], references: [category_name])
+  category_name String @db.VarChar()
+
+  @@id([recipe_id, category_name])
+}
+
+//Meal Plan
+
+model RecipesOnMealPlans{
+  account Account @relation(fields: [account_id], references: [account_id])
+  account_id String
+  recipe Recipe @relation(fields: [recipe_id], references: [recipe_id])
+  recipe_id Int
+
+  @@id([account_id, recipe_id])
+}
+
+//Recommendation
+model RecipesOnProfileRecommendations{
+  account Account @relation(fields: [account_id], references: [account_id])
+  account_id String
+  recipe Recipe @relation(fields: [recipe_id], references: [recipe_id])
+  recipe_id Int
+  calories_status String @default("Aman")
+  sugar_status String @default("Aman")
+  cholesterol_status String @default("Aman")
+  natrium_status String @default("Aman")
+  user_recommendation_value String @default("Aman")
+
+  @@id([account_id, recipe_id])
+}
+
+//AccessToken
+model BlacklistedToken {
+  id        Int      @id @default(autoincrement())
+  token     String @unique
+  createdAt DateTime @default(now())
+}

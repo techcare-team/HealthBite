@@ -2,25 +2,151 @@ const ProfileModel = require("./profile.model")
 const { AgeFromDateString } = require('age-calculator');
 
 // GET
-const getHomeProfile = async (account_id) => {
+const getProfile = async (account_id) => {
     const dataProfile = await ProfileModel.findProfile(account_id)
-    console.log({dataProfile});
 
     if(!dataProfile){
         throw Error("Profile is not exist")
     }
 
-    const dataNutrition = await ProfileModel.findNutrition(account_id)
+    let arrayDisease = []
 
-    if(!dataNutrition){
-        throw Error("Nutrition is not exist")
+    if(dataProfile.diabetes == true){
+        arrayDisease.push("Penderita Diabetes")
     }
 
-    return {dataProfile, dataNutrition}
+    if(dataProfile.heart_disease == true){
+        arrayDisease.push("Penderita Penyakit Jantung")
+    }
+    
+    if(dataProfile.hypertension == true){
+        arrayDisease.push("Penderita Darah Tinggi")
+    }
+    
+
+    return {dataProfile, arrayDisease}
+    
+}
+
+const getDetailProfile = async (account_id) => {
+    const dataDetailProfile = await ProfileModel.findDetailProfile(account_id)
+
+    
+    if(!dataDetailProfile){
+        throw Error("Profile is not exist")
+    }
+
+    let {        
+        name, 
+        gender, 
+        date_of_birth, 
+        height,
+        weight,
+        goal_id,
+        diabetes,
+        blood_sugar_value,
+        hypertension,
+        blood_pressure_value, 
+        heart_disease,
+        total_cholesterol_value
+    } = dataDetailProfile
+
+    goal_name = null
+
+    if(goal_id == 1){
+        goal_name = "Menaikkan Berat Badan"
+    } else if(goal_id == 2){
+        goal_name = "Menjaga Berat Badan"
+    } else {
+        goal_name = "Menurunkan Berat Badan"
+    }
+
+    if(blood_sugar_value == null){
+        blood_sugar_value = 0
+    }
+
+    if(blood_pressure_value == null){
+        blood_pressure_value = 0
+    }
+
+    if(total_cholesterol_value == null){
+        total_cholesterol_value = 0
+    }
+
+    date_of_birth = date_of_birth.toISOString().split('T')[0]
+
+    return {
+        name, 
+        gender, 
+        date_of_birth, 
+        height,
+        weight,
+        goal_name,
+        diabetes,
+        blood_sugar_value,
+        hypertension,
+        blood_pressure_value, 
+        heart_disease,
+        total_cholesterol_value
+    }
     
 }
 
 // PUT/UPDATE
+const updateProfileAndNutrition = async (
+    account_id,
+    name,
+    gender,
+    date_of_birth,
+    height,
+    weight,
+    goal_id,
+    diabetes,
+    blood_sugar_value,
+    hypertension,
+    blood_pressure_value, 
+    heart_disease,
+    total_cholesterol_value,
+) => {
+    const dataProfile = await ProfileModel.updateProfile(
+        account_id,
+        name,
+        gender,
+        date_of_birth,
+        height,
+        weight,
+        goal_id,
+        diabetes,
+        blood_sugar_value,
+        hypertension,
+        blood_pressure_value, 
+        heart_disease,
+        total_cholesterol_value,
+    )
+    
+    //calculate Max Nutritrion User
+    const { maxCaloriesIntake, maxSugarsIntake, maxCholesterolIntake, maxNatriumIntake } = await calculateMaxNutritionUser(
+        gender,
+        date_of_birth,
+        height,
+        weight,
+        goal_id,
+        diabetes,
+        hypertension,
+        heart_disease
+    )
+
+    const dataNutrition = await ProfileModel.updateNutrition(
+        account_id,
+        maxCaloriesIntake, 
+        maxSugarsIntake, 
+        maxCholesterolIntake, 
+        maxNatriumIntake
+    )
+    
+    return {dataProfile, dataNutrition}
+}
+
 //UPDATE Profile
 const updateProfile = async (account_id,{
     name,
@@ -58,76 +184,40 @@ const updateProfile = async (account_id,{
     });
 }
 
+//Delete
+const deleteProfile = async (account_id) =>{
+    const dataNutrition = await ProfileModel.findNutrition(account_id)
 
-// POST
-const createProfile = async (            
-    account_id,
-    name,
-    gender,
-    date_of_birth,
-    height,
-    weight,
-    goal_id,
-    diabetes,
-    blood_sugar_value,
-    hypertension,
-    blood_pressure_value, 
-    heart_disease,
-    total_cholesterol_value,
-) => {
+    if(dataNutrition){
+        await ProfileModel.deleteNutrition(account_id)
+    }
 
-    const dataProfile = await ProfileModel.createProfile(
-    account_id,
-    name,
-    gender,
-    date_of_birth,
-    height,
-    weight,
-    goal_id,
-    diabetes,
-    blood_sugar_value,
-    hypertension,
-    blood_pressure_value, 
-    heart_disease,
-    total_cholesterol_value,
-    )
+    const dataProfile = await ProfileModel.findProfile(account_id)
 
-    return dataProfile
+    if(dataProfile){
+        await ProfileModel.deleteProfile(account_id)
+    }
+
+    const dataMealPlans = await ProfileModel.findMealPlans(account_id)
+
+    if(dataMealPlans){
+        await ProfileModel.deleteMealPlans(account_id)
+    }
+
+    const dataProfileRecommendation = await ProfileModel.findProfileRecommendations(account_id)
+
+    if(dataProfileRecommendation){
+        await ProfileModel.deleteProfileRecommendations(account_id)
+    }
+
+    const deleteProfile = await ProfileModel.deleteAccount(account_id)
+
+    return deleteProfile
 }
 
-const createNutrition = async (
-    account_id,
-    gender,
-    date_of_birth,
-    height,
-    weight,
-    goal_id,
-    diabetes,
-    hypertension,
-    heart_disease,
-) => {
-    const { maxCaloriesIntake, maxSugarsIntake, maxCholesterolIntake, maxNatriumIntake } = calculateMaxNutritionUser(
-        gender,
-        date_of_birth,
-        height,
-        weight,
-        goal_id,
-        diabetes,
-        hypertension,
-        heart_disease
-    )
 
-    const dataNutrition = await ProfileModel.createNutrition(
-        account_id,
-        maxCaloriesIntake, 
-        maxSugarsIntake, 
-        maxCholesterolIntake, 
-        maxNatriumIntake
-    )
 
-    return dataNutrition
-}
-
+//Function for Calculate Max Nutrition User
 const calculateMaxNutritionUser = (
     gender,
     date_of_birth,
@@ -187,10 +277,10 @@ const calculateMaxNutritionUser = (
     return { maxCaloriesIntake, maxSugarsIntake, maxCholesterolIntake, maxNatriumIntake }
 }
 
-
 module.exports = {
-    getHomeProfile,
-    createProfile,
-    createNutrition,
-    updateProfile
+    getProfile,
+    getDetailProfile,
+    updateProfile,
+    updateProfileAndNutrition,
+    deleteProfile
 }

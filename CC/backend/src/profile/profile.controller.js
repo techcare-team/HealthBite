@@ -1,36 +1,81 @@
 const ProfileService = require("./profile.service")
 
-const getHomeProfile = async (req, res) => {
+const getProfile = async (req, res) => {
     try{
         const account_id = req.userData.account_id
 
-        const {dataProfile, dataNutrition} = await ProfileService.getHomeProfile(account_id)
+        const {dataProfile, arrayDisease} = await ProfileService.getProfile(account_id)
         
         res.status(200).json({
-            message : "get data Profile & Nutrition success!",
+            success: true,
+            message : "Get Data Profile!",
             data: {
                 name: dataProfile.name,
                 profile_photo: dataProfile.profile_photo,
-                calories_value: dataNutrition.calories_value,
-                calories_max_value: dataNutrition.calories_max_value,
-                sugar_value: dataNutrition.sugar_value,
-                sugar_max_value: dataNutrition.sugar_max_value,
-                cholesterol_value: dataNutrition.cholesterol_value,
-                cholesterol_max_value: dataNutrition.cholesterol_max_value,
-                natrium_value: dataNutrition.natrium_value,
-                natrium_max_value: dataNutrition.natrium_max_value
+                penyakit_user: arrayDisease
             }
         })
     } catch (error) {
-        console.error("Server Error di Controller profile, Function getHomeProfile");
+        console.error("Server Error di Controller profile, Function getProfile");
         res.status(500).json({
-            message: "Server error",
-            serverMessage: error.message,
+            success: false,
+            code: 500,
+            message: error.message
         });
     }
 }
 
-const createProfileAndNutrition = async (req, res) => {
+const getDetailProfile = async (req, res) => {
+    try{
+        const account_id = req.userData.account_id
+
+        //Update Profile & Nutrition
+        const {        
+            name, 
+            gender, 
+            date_of_birth, 
+            height,
+            weight,
+            goal_name,
+            diabetes,
+            blood_sugar_value,
+            hypertension,
+            blood_pressure_value, 
+            heart_disease,
+            total_cholesterol_value
+        } = await ProfileService.getDetailProfile(account_id)
+
+        res.status(200).json({
+            success: true,
+            message : "Get Data Profile Success!",
+            data: {
+                name, 
+                gender, 
+                date_of_birth, 
+                height,
+                weight,
+                goal_name,
+                diabetes,
+                blood_sugar_value,
+                hypertension,
+                blood_pressure_value, 
+                heart_disease,
+                total_cholesterol_value
+            }
+        })
+    } catch (error) {
+        console.error("Server Error di Controller profile, Function getDetailProfile");
+        console.error(error.message);
+        res.status(500).json({
+            success: false,
+            code: 500,
+            message: error.message
+        });
+    }
+}
+
+//Update
+const updateProfileAndNutrition = async (req, res) => {
     try{
         const account_id = req.userData.account_id
         const {
@@ -48,8 +93,8 @@ const createProfileAndNutrition = async (req, res) => {
             total_cholesterol_value,
         } = req.validatedData
 
-        //create profile
-        const dataProfile = await ProfileService.createProfile(
+        //Update Profile & Nutrition
+        const {dataProfile, dataNutrition} = await ProfileService.updateProfileAndNutrition(
             account_id,
             name,
             gender,
@@ -65,57 +110,52 @@ const createProfileAndNutrition = async (req, res) => {
             total_cholesterol_value,
         )
 
-        //create nutrition
-        const dataNutrition = await ProfileService.createNutrition(
-            account_id,
-            gender,
-            date_of_birth,
-            height,
-            weight,
-            goal_id,
-            diabetes,
-            hypertension,
-            heart_disease,
-        )
-
-        console.log(`di controller profile${account_id}`)
-
         res.status(200).json({
-            message : "get data Profile & Nutrition success!",
+            success: true,
+            message : "Update Data Profile & Nutrition Success!",
             data: {
                 dataProfile, dataNutrition
             }
         })
     } catch (error) {
-        console.error("Server Error di Controller profile, Function createProfileAndNutrition");
+        console.error("Server Error di Controller profile, Function updateProfileAndNutrition");
         console.error(error.message);
         res.status(500).json({
-            message: "Server error",
-            serverMessage: error.message,
+            success: false,
+            code: 500,
+            message: error.message
         });
     }
 }
 
-//UPDATE Profile
-const updateProfile = async (req, res) => {
+const deleteProfile = async (req, res) => {
     try{
-        const { profile_id, date_of_birth } = req.body;
-        const payload = req.body;
-        const newDate = new Date(date_of_birth).toISOString();
-        await ProfileService.updateProfile(profile_id, {...payload, date_of_birth: newDate});
+        const account_id = req.userData.account_id
+
+        //Delete Profile & Nutrition
+        const datadeleteProfile = await ProfileService.deleteProfile(account_id)
+
         res.status(200).json({
-            message: 'profile updated'
+            success: true,
+            message : "Delete Profile Success!",
+            data: {
+                datadeleteProfile
+            }
         })
-    } catch(err){
+    } catch (error) {
+        console.error("Server Error di Controller profile, Function deleteProfile");
+        console.error(error.message);
         res.status(500).json({
-            message: 'Server error',
-            serverMessage: err.message
-        })
+            success: false,
+            code: 500,
+            message: error.message
+        });
     }
-};
+}
 
 module.exports = {
-    getHomeProfile,
-    createProfileAndNutrition,
-    updateProfile
+    getProfile,
+    getDetailProfile,
+    updateProfileAndNutrition,
+    deleteProfile
 }

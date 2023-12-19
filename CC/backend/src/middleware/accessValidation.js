@@ -7,6 +7,8 @@ const accessValidation = async (req, res, next) => {
 
     if(!authorization){
         return res.status(401).json({
+            success: false,
+            code: 401,
             message: "Token is required"
         })
     }
@@ -19,6 +21,8 @@ const accessValidation = async (req, res, next) => {
 
     if (isInBlacklist) {
         return res.status(401).json({
+            success: false,
+            code: 401,
             message: "Please Log In"
         });
     }
@@ -41,8 +45,9 @@ const accessValidation = async (req, res, next) => {
         req.userData = jwtDecode
     } catch (error) {
         return res.status(401).json({
-            message: "unauthorized",
-            serverMessage: error.message
+            success: false,
+            code: 401,
+            message: error.message
         })
     }
 
