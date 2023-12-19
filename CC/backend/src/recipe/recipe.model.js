@@ -244,6 +244,18 @@ const createMealPlan = (account_id, recipe_id) => {
     })
 }
 
+//Delete
+const deleteMealPlan = (account_id, recipe_id)=>{
+    return prisma.recipesOnMealPlans.delete({
+        where: {
+            account_id_recipe_id: {
+                account_id,
+                recipe_id
+            }
+        }
+    })
+}
+
 //Model CategoriesonRecipes
 //GET
 const findCategoriesOnRecipe = (recipe_id) => {
@@ -314,5 +326,6 @@ module.exports = {
     deleteRecipeById,
     deleteCategoriesOnRecipe,
     deleteProfileRecommendationOnRecipe,
+    deleteMealPlan
 }
 

@@ -259,9 +259,10 @@ const updateRecipeById = async (req, res) => {
 //Delete
 const deleteRecipeById = async (req, res) => {
     try {
+        const account_id = req.userData.account_id
         const recipe_id = parseInt(req.params.id) 
         
-        const deleteRecipeById = await RecipesService.deleteRecipeById(recipe_id)
+        const deleteRecipeById = await RecipesService.deleteRecipeById(recipe_id, account_id)
 
         return res.status(200).json({
             success: true,

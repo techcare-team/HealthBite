@@ -248,7 +248,7 @@ const updateRecipeById = async (
 }
 
 //DELETE
-const deleteRecipeById = async (recipe_id) => {
+const deleteRecipeById = async (recipe_id, account_id) => {
     const dataRecipebyId = await RecipesModel.findRecipeById(recipe_id)
     
     if (!dataRecipebyId) {
@@ -263,8 +263,14 @@ const deleteRecipeById = async (recipe_id) => {
 
     const findProfileRecommendationOnRecipe = await RecipesModel.findProfileRecommendationOnRecipe(recipe_id)
 
-    if(findCategoriesOnRecipe.length > 0){
+    if(findProfileRecommendationOnRecipe.length > 0){
         const deleteProfileRecommendationOnRecipe = await RecipesModel.deleteProfileRecommendationOnRecipe(recipe_id)
+    }
+
+    const findRecipeOnMealPlan = await RecipesModel.findMealPlanOnProfile(account_id, recipe_id)
+
+    if(findRecipeOnMealPlan){
+        const deleteRecipeOnMealPlan = await RecipesModel.deleteMealPlan(account_id, recipe_id)
     }
 
     const dataDeleteRecipeById = await RecipesModel.deleteRecipeById(recipe_id)
