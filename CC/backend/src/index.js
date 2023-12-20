@@ -6,6 +6,7 @@ dotenv.config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+
 const PORT = process.env.PORT
 
 const accessValidation = require("./middleware/accessValidation")
@@ -52,5 +53,8 @@ app.use((err, req, res, next) => {
     })
 })
 
+app.get('/', (req, res) => {
+    res.send('ok');
+})
 
 app.listen(PORT, ()=>console.log('listen port ' + PORT))
