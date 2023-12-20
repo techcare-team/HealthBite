@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,12 +21,23 @@
         android:theme="@style/Theme.HealthBite"
         tools:targetApi="31">
         <activity
+            android:name=".ui.camera.CameraIngredientCaptureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.camera.CameraFoodCaptureActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.camera.CameraIngredientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.camera.CameraFoodActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.login.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".activity.main.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

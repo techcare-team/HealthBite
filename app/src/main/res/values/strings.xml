@@ -9,4 +9,107 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="statistic_profile">Profile Statistik</string>
+    <string name="profile_image">Gambar Profil</string>
+    <string name="calories">Kalori</string>
+    <string name="sugar">Gula</string>
+    <string name="cholesterol">Kolesterol</string>
+    <string name="natrium">Natrium</string>
+    <string name="daily_consumsion">Konsumsi Harian</string>
+    <string name="ic_add_consumtion">Ikon Tambah Konsumsi</string>
+    <string name="food_name">Nama Makanan</string>
+    <string name="food_status">Status Makanan</string>
+    <string name="food_photo">Foto Makanan</string>
+    <string name="add_food_to_consume">Tambah</string>
+    <string name="title_ai_scan">Kontrol pola makan dengan cerdas</string>
+    <string name="description_ai_scan">Tubuh yang sehat juga berasal dari makanan yang sesuai. Hindari pola makan yang tidak sesuai agar tidak menganggu kesehatanmu. Atur pola makanmu sesuai kebutuhan tubuhmu.</string>
+    <string name="scan_food">Scan Makanan</string>
+    <string name="scan_ingredien">Scan Bahan Makanan</string>
+    <string name="title_food_scan">Scan Makanan</string>
+    <string name="attention_food_scan">Pastikan objek makanan tertangkap dengan baik.</string>
+    <string name="open_camera">Buka Kamera</string>
+    <string name="pick_gallery">Ambil Dari Galeri</string>
+    <string name="name_ingredient">Nama Bahan Makanan</string>
+    <string name="decoration">Hiasan</string>
+    <string name="btn_capture">Tangkap Gambar</string>
+    <string name="button_switch">Pindah Kamera</string>
+    <string name="choose_picture">Pilih Gambar</string>
+    <string name="failed_take_picture">Pilih Gambar</string>
+    <string name="failed_bring_up_camera">Gagal Membuka Kamera</string>
+    <string name="failed_permission">Gagal Tidak Mendapat Izin</string>
+    <string name="label_invalid_email">Format Email tidak valid.</string>
+    <string name="label_validation_password">Password tidak boleh kurang dari 8 karakter.</string>
+    <string name="regitration">Daftar</string>
+    <string name="login">Masuk</string>
+    <string name="logout">Keluar</string>
+    <string name="login_complement">Gambar Pelengkap</string>
+    <string name="signup_complement">Gambar Pelengkap</string>
+    <string name="copyright" translatable="false">© 2023</string>
+    <string name="have_account">Belum Punya Akun?</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="name">Nama</string>
+
+    <!-- String Dummy -->
+    <!-- Satuan -->
+    <string name="kkal">kkal</string>
+    <string name="gram">gr</string>
+    <string name="miligram">mg</string>
+
+    <!-- Value Constant Card View -->
+    <string name="vcvcal">1836</string>
+    <string name="vcvglu">50</string>
+    <string name="vcvchol">650</string>
+    <string name="vcvnat">1900</string>
+
+    <!-- Value Constant Monitor -->
+    <string name="vmcal">600</string>
+    <string name="vmglu">-7</string>
+    <string name="vmchol">140</string>
+    <string name="vmnat">1100</string>
+
+
+
+
+    <string-array name="data_name">
+        <item>Ayam Bakar</item>
+        <item>Opor Ayam</item>
+        <item>Donat</item>
+    </string-array>
+
+    <integer-array name="data_photo">
+        <item>@drawable/ayam_bakar</item>
+        <item>@drawable/opor_ayam</item>
+        <item>@drawable/donat</item>
+    </integer-array>
+
+    <integer-array name="data_calories">
+        <item>400</item>
+        <item>412</item>
+        <item>336</item>
+    </integer-array>
+
+    <integer-array name="data_sugar">
+        <item>12</item>
+        <item>7</item>
+        <item>40</item>
+    </integer-array>
+
+    <integer-array name="data_cholesterol">
+        <item>220</item>
+        <item>350</item>
+        <item>100</item>
+    </integer-array>
+
+    <integer-array name="data_natrium">
+        <item>345</item>
+        <item>433</item>
+        <item>55</item>
+    </integer-array>
+
+    <integer-array name="data_delete">
+        <item>@drawable/ic_delete_red_24dp</item>
+        <item>@drawable/ic_delete_red_24dp</item>
+        <item>@drawable/ic_delete_red_24dp</item>
+    </integer-array>
 </resources>

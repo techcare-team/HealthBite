@@ -5,24 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:paddingBottom="40dp">
+    android:paddingBottom="32dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="top|center"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/title_ai_scan"
+            android:id="@+id/title_food_scan"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:layout_marginTop="32dp"
+            android:textSize="36sp"
+            android:layout_marginTop="44dp"
             android:textStyle="bold"
-            android:text="@string/title_ai_scan"
-            android:gravity="center_horizontal" />
+            android:text="@string/title_food_scan"
+            android:gravity="center_horizontal"
+            />
 
         <ImageView
             android:id="@+id/img_item_photo"
@@ -32,41 +33,43 @@
             android:gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/kumpulan_makanan" />
+            android:src="@drawable/food_scan" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginTop="40dp"
-            android:text="@string/description_ai_scan"
-            android:gravity="center_horizontal" />
+            android:text="@string/attention_food_scan"
+            android:gravity="center_horizontal"
+            />
 
         <Button
-            android:id="@+id/btn_food"
+            android:id="@+id/btn_open_camera"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
             android:textStyle="bold"
-            android:text="@string/scan_food"
+            android:text="@string/open_camera"
             android:elevation="4dp"
-            android:background="@drawable/rounded_button_red"
+            android:background="@drawable/rounded_button_greenlight"
             android:textColor="#FFFFFF"
-            app:backgroundTint="@null" />
+            app:backgroundTint="@null"
+            />
 
         <Button
-            android:id="@+id/btn_ingredient"
+            android:id="@+id/btn_pick_gallery"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textStyle="bold"
-            android:text="@string/scan_ingredien"
+            android:text="@string/pick_gallery"
             android:elevation="4dp"
-            android:background="@drawable/rounded_button_yellow"
+            android:background="@drawable/rounded_button_darkgreen"
             android:textColor="#FFFFFF"
-            app:backgroundTint="@null" />
-
+            app:backgroundTint="@null"
+            />
     </LinearLayout>
 </ScrollView>

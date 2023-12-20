@@ -1,22 +1,390 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.dashboard.DashboardFragment"
+    android:fillViewport="true"
+    android:paddingBottom="40dp">
 
-    <TextView
-        android:id="@+id/text_dashboard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/profil_stat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:textSize="18sp"
+            android:text="@string/statistic_profile"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintStart_toStartOf="@+id/profil_stat"
+            app:layout_constraintTop_toBottomOf="@+id/profil_stat">
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/profile_image"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                android:src="@drawable/profile"/>
+
+            <LinearLayout
+                android:id="@+id/nutrition_on_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="164dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/cal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/calories"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <TextView
+                    android:id="@+id/glu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/sugar"
+                    app:layout_constraintTop_toBottomOf="@+id/cal"/>
+
+                <TextView
+                    android:id="@+id/chol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/cholesterol"
+                    app:layout_constraintTop_toBottomOf="@+id/glu"/>
+
+                <TextView
+                    android:id="@+id/nat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/natrium"
+                    app:layout_constraintTop_toBottomOf="@+id/col"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/value_on_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="244dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/v_cal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:text="@string/vcvcal"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <TextView
+                    android:id="@+id/v_glu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:text="@string/vcvglu"
+                    app:layout_constraintTop_toBottomOf="@+id/v_cal"/>
+
+                <TextView
+                    android:id="@+id/v_chol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:text="@string/vcvchol"
+                    app:layout_constraintTop_toBottomOf="@+id/v_glu"/>
+
+                <TextView
+                    android:id="@+id/v_nat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    android:text="@string/vcvnat"
+                    app:layout_constraintTop_toBottomOf="@+id/v_col"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/unit_on_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="312dp"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/u_cal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    android:text="@string/kkal"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+
+                <TextView
+                    android:id="@+id/u_glu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    android:text="@string/gram"
+                    app:layout_constraintTop_toBottomOf="@+id/v_cal"/>
+
+                <TextView
+                    android:id="@+id/u_chol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    android:text="@string/miligram"
+                    app:layout_constraintTop_toBottomOf="@+id/v_glu"/>
+
+                <TextView
+                    android:id="@+id/u_nat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    android:text="@string/miligram"
+                    app:layout_constraintTop_toBottomOf="@+id/v_col"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/daily_consumtion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:textSize="18sp"
+            android:text="@string/daily_consumsion"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardview_dashboard" />
+
+        <LinearLayout
+            android:id="@+id/monitor_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/daily_consumtion">
+
+            <TextView
+                android:id="@+id/tm_cal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="16dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="@string/calories"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tm_glu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="46dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="@string/sugar"
+                app:layout_constraintStart_toEndOf="@+id/tm_cal"/>
+
+            <TextView
+                android:id="@+id/tm_chol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="46dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="@string/cholesterol"
+                app:layout_constraintStart_toEndOf="@+id/tm_glu"/>
+
+            <TextView
+                android:id="@+id/tm_nat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="46dp"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="@string/natrium"
+                app:layout_constraintStart_toEndOf="@+id/tm_chol"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/value_monitor_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/monitor_item">
+
+            <TextView
+                android:id="@+id/vm_cal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="16dp"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:text="@string/vmcal"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <TextView
+                android:id="@+id/vm_glu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="46dp"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:text="@string/vmglu"
+                app:layout_constraintStart_toEndOf="@+id/tm_cal"/>
+
+            <TextView
+                android:id="@+id/vm_chol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="46dp"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:text="@string/vmchol"
+                app:layout_constraintStart_toEndOf="@+id/tm_glu"/>
+
+            <TextView
+                android:id="@+id/vm_nat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginStart="46dp"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:text="@string/vmnat"
+                app:layout_constraintStart_toEndOf="@+id/tm_chol"/>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_consumtion"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="12dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="30dp"
+            app:cardBackgroundColor="#00AA13"
+            app:layout_constraintBottom_toBottomOf="@+id/value_monitor_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/monitor_item">
+            <ImageView
+                android:id="@+id/ic_add_consumtion"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:contentDescription="@string/ic_add_consumtion"
+                android:layout_gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_add_white_24dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_daily_consumtion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="start"
+            app:layout_constraintStart_toStartOf="@+id/value_monitor_item"
+            app:layout_constraintTop_toBottomOf="@+id/value_monitor_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
