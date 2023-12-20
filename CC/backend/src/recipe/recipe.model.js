@@ -135,6 +135,20 @@ const updateRecipesRecommendation = (
       });
 }
 
+const updatePhotoRecipeById = (
+    recipe_id,
+    recipe_photo
+) => {
+    return prisma.recipe.update({
+        where: { 
+          recipe_id
+      },
+        data: {
+            recipe_photo
+        },
+      });
+}
+
 //CREATE
 const createRecipe = (
     recipe_photo,
@@ -321,6 +335,7 @@ module.exports = {
     updateRecipeById,
     updateRecipesRecommendation,
     updateNutritionOnProfile,
+    updatePhotoRecipeById,
     findNutrition,
     createMealPlan,
     deleteRecipeById,

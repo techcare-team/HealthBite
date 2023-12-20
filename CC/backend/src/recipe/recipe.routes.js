@@ -23,6 +23,8 @@ router.post('/', isAdmin, uploadRecipe.single('recipe_photo'), recipeValidation,
 //Update
 router.put('/:id', isAdmin, uploadRecipe.single('recipe_photo'), recipeValidation, RecipesController.updateRecipeById)
 
+router.patch('/:id', isAdmin, RecipesController.updatePhotoRecipeById)
+
 //Delete
 router.delete('/:id', isAdmin, RecipesController.deleteRecipeById)
 

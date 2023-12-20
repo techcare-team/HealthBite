@@ -152,6 +152,7 @@ const getRecipebyAi = async (account_id, recipe_name) => {
 
     return {dataRecipeWithAi, dataRecommendation, isMealPlanExist}
 }
+
 //CREATE
 const addRecipe = async (
     recipe_photo,
@@ -245,6 +246,18 @@ const updateRecipeById = async (
     )
     
     return updateRecipe
+}
+
+const updatePhotoRecipeById = async (recipe_id, recipe_photo) => {
+    const dataRecipeById = await RecipesModel.findRecipeById(recipe_id)
+
+    if(!dataRecipeById){
+        throw Error('Recipe not found')
+    }
+
+    const dataUpdateRecipeById = await RecipesModel.updatePhotoRecipeById(recipe_id, recipe_photo)
+
+    return dataUpdateRecipeById
 }
 
 //DELETE
@@ -404,5 +417,6 @@ module.exports = {
     getRecipebyAi,
     addRecipe,
     updateRecipeById,
+    updatePhotoRecipeById,
     deleteRecipeById
 }

@@ -256,6 +256,35 @@ const updateRecipeById = async (req, res) => {
     }
 }
 
+const updatePhotoRecipeById = async (req, res) => {
+    try {
+        const recipe_id = parseInt(req.params.id)
+        const recipe_photo = req.body.recipe_photo
+
+        const dataUpdateRecipe = await RecipesService.updatePhotoRecipeById(recipe_id, recipe_photo)
+        
+        res.status(200).json({
+            success: true,
+            message : "Update Photo Recipe Success!",
+            data: dataUpdateRecipe
+        })
+    } catch (error) {
+        if(error.message == "Recipe not found"){
+            return res.status(400).json({
+                success: false,
+                code: 400,
+                message: error.message
+            })
+        }
+        console.error("Server Error di Controller Recipe, Function updatePhotoRecipeById");
+        return res.status(500).json({
+            success: false,
+            message: "Server error",
+            serverMessage: error.message,
+        });
+    }
+}
+
 //Delete
 const deleteRecipeById = async (req, res) => {
     try {
@@ -294,6 +323,7 @@ module.exports = {
     getRecipebyAi,
     addRecipe,
     updateRecipeById,
+    updatePhotoRecipeById,
     deleteRecipeById
 
 }
