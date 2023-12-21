@@ -3,27 +3,33 @@ package com.techcare.healthbite.ui.recipe
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techcare.healthbite.R
 import com.techcare.healthbite.adapter.ListRecipeAdapter
-import com.techcare.healthbite.data.Recipe
 import com.techcare.healthbite.databinding.FragmentRecipeBinding
+import com.techcare.healthbite.response.DataItem
 
 class RecipeFragment : Fragment() {
 
     private lateinit var rvRecipe: RecyclerView
     private var _binding: FragmentRecipeBinding? = null
+    private lateinit var searchView: SearchView
+    private lateinit var filterItem: MenuItem
+    private val recipeViewModel by viewModels<RecipeViewModel>()
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
-        // Hide the action bar
-        //(activity as AppCompatActivity?)?.supportActionBar?.hide()
     }
 
     override fun onCreateView(
@@ -37,35 +43,51 @@ class RecipeFragment : Fragment() {
 
         rvRecipe = binding.rvRecipe
 
-        showRecyclerList()
+        recipeViewModel.listRecipe.observe(viewLifecycleOwner) { list ->
+            if (list != null) {
+                setRecipeData(list)
+            }
+        }
+
+
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.rvRecipe.layoutManager = layoutManager
+
+        recipeViewModel.listRecipe.observe(viewLifecycleOwner) { list ->
+            setRecipeData(list)
+        }
+
         return root
     }
 
-    private fun getListRecipe(): ArrayList<Recipe> {
-        val dataImage = resources.obtainTypedArray(R.array.data_photo)
-        val dataName = resources.getStringArray(R.array.data_name)
-        val dataCalories = resources.getIntArray(R.array.data_calories)
-        val dataSugar = resources.getIntArray(R.array.data_sugar)
-        val dataCholesterol = resources.getIntArray(R.array.data_cholesterol)
-        val dataNatrium = resources.getIntArray(R.array.data_natrium)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.option_menu_recipe, menu)
 
-        val listRecipe = ArrayList<Recipe>()
-        for (i in dataName.indices) {
-            val recipe = Recipe(dataImage.getResourceId(i, -1),dataName[i],  dataCalories[i], dataSugar[i], dataCholesterol[i], dataNatrium[i])
-            listRecipe.add(recipe)
+        val searchItem = menu.findItem(R.id.action_search)
+        searchView = searchItem.actionView as SearchView
+
+        filterItem = menu.findItem(R.id.action_filter)
+    }
+
+
+
+
+    private fun setRecipeData(listUser: List<DataItem>) {
+        val adapter = ListRecipeAdapter()
+        adapter.submitList(listUser)
+        binding.rvRecipe.adapter = adapter
+    }
+
+
+    private fun ifUserNotFound(isDataNotFound: Boolean) {
+        binding.apply {
+            if (isDataNotFound) {
+                rvRecipe.visibility = View.GONE
+//                tvNotFound.visibility = View.VISIBLE
+            } else {
+                rvRecipe.visibility = View.VISIBLE
+//                tvNotFound.visibility = View.GONE
+            }
         }
-        return listRecipe
-    }
-
-    private fun showRecyclerList() {
-        rvRecipe.layoutManager = LinearLayoutManager(requireContext())
-        val listRecipeAdapter = ListRecipeAdapter(getListRecipe())
-        rvRecipe.adapter = listRecipeAdapter
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-//        (activity as AppCompatActivity?)?.supportActionBar?.show()
     }
 }

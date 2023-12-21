@@ -240,12 +240,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardview_dashboard" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/monitor_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="2dp"
+            android:padding="6dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/daily_consumtion">
@@ -254,106 +255,123 @@
                 android:id="@+id/tm_cal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="16dp"
+                android:gravity="start"
+                android:text="@string/calories"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:text="@string/calories"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tm_glu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="46dp"
+                android:gravity="start"
+                android:text="@string/sugar"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:text="@string/sugar"
-                app:layout_constraintStart_toEndOf="@+id/tm_cal"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tm_cal"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tm_chol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="46dp"
+                android:gravity="start"
+                android:text="@string/cholesterol"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:text="@string/cholesterol"
-                app:layout_constraintStart_toEndOf="@+id/tm_glu"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tm_glu"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tm_nat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="46dp"
+                android:gravity="start"
+                android:text="@string/natrium"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:text="@string/natrium"
-                app:layout_constraintStart_toEndOf="@+id/tm_chol"/>
-        </LinearLayout>
-        <LinearLayout
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tm_chol"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/value_monitor_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="2dp"
+            android:padding="6dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/monitor_item">
+
 
             <TextView
                 android:id="@+id/vm_cal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="16dp"
+                android:gravity="start"
+                android:text="@string/vmcal"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                android:text="@string/vmcal"
-                app:layout_constraintStart_toStartOf="parent" />
-
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/vm_glu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="46dp"
+                android:gravity="start"
+                android:text="@string/vmglu"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                android:text="@string/vmglu"
-                app:layout_constraintStart_toEndOf="@+id/tm_cal"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/vm_cal"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/vm_chol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="46dp"
+                android:gravity="start"
+                android:text="@string/vmchol"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                android:text="@string/vmchol"
-                app:layout_constraintStart_toEndOf="@+id/tm_glu"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/vm_glu"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/vm_nat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start"
                 android:layout_marginStart="46dp"
+                android:gravity="start"
+                android:text="@string/vmnat"
                 android:textSize="14sp"
                 android:textStyle="normal"
-                android:text="@string/vmnat"
-                app:layout_constraintStart_toEndOf="@+id/tm_chol"/>
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/vm_chol"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/add_consumtion"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="12dp"
@@ -381,8 +399,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:gravity="start"
             app:layout_constraintStart_toStartOf="@+id/value_monitor_item"
             app:layout_constraintTop_toBottomOf="@+id/value_monitor_item" />

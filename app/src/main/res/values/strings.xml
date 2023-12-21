@@ -67,8 +67,16 @@
     <string name="vmglu">-7</string>
     <string name="vmchol">140</string>
     <string name="vmnat">1100</string>
-
-
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="add_diary_consumtion">Tambahkan ke Diary Consumtion</string>
+    <string name="food_description">Deskripsi singkat makanan.</string>
+    <string name="title_ingredient">Judul_Bahan</string>
+    <string name="ingredient_content">Keterangan Bahan</string>
+    <string name="title_cook_method">Cara Memasak</string>
+    <string name="cook_method_content">Isi cara memasak</string>
+    <string name="title_nutrition">Kandungan</string>
+    <string name="content_title">Isi konten kandungan.</string>
 
 
     <string-array name="data_name">

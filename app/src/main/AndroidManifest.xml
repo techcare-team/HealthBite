@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission
@@ -20,6 +22,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthBite"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.signup.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.signup.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.detail.DetailRecipeActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.camera.CameraIngredientCaptureActivity"
             android:exported="false" />

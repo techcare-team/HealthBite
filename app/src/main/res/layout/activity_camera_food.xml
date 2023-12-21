@@ -36,12 +36,22 @@
             android:src="@drawable/food_scan" />
 
         <TextView
+            android:id="@+id/result"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
             android:id="@+id/description"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="24dp"
             android:text="@string/attention_food_scan"
             android:gravity="center_horizontal"
             />
