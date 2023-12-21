@@ -28,18 +28,18 @@ const getRecipes = async (account_id, ingredients, recipe_name, categories, ai) 
         natrium_value,
         natrium_max_value
     )
-
+    
     if (typeof ingredients === 'string') {
         ingredients = [ingredients];
     }
 
     //lowercase the ingredients query
-    ingredients = ingredients.map(function (ingredient) {
-        return ingredient.toLowerCase();
-      });
+    if(ingredients){
+        ingredients = ingredients.map(function (ingredient) {
+            return ingredient.toLowerCase();
+          });
+    }
     
-    console.log(ingredients)
-
     if (typeof categories === 'string') {
         categories = [categories];
     }
