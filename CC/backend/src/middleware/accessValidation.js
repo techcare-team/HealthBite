@@ -4,7 +4,7 @@ const prisma = require("../config/db.config")
 
 const accessValidation = async (req, res, next) => {
     const {authorization} = req.headers
-
+    
     if(!authorization){
         return res.status(401).json({
             success: false,
@@ -14,7 +14,7 @@ const accessValidation = async (req, res, next) => {
     }
 
     const token = authorization.split(' ')[1]
-
+    
     const isInBlacklist = await prisma.blacklistedToken.findUnique({
         where: { token },
     });

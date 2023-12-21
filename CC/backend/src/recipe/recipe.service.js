@@ -33,6 +33,13 @@ const getRecipes = async (account_id, ingredients, recipe_name, categories, ai) 
         ingredients = [ingredients];
     }
 
+    //lowercase the ingredients query
+    ingredients = ingredients.map(function (ingredient) {
+        return ingredient.toLowerCase();
+      });
+    
+    console.log(ingredients)
+
     if (typeof categories === 'string') {
         categories = [categories];
     }

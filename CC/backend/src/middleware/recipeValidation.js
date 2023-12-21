@@ -21,11 +21,9 @@ const recipeValidationInput = async (req, res, next) => {
         // Perform validation input checks for profile 
         const errors = [];
 
-        if(req.file){
-            recipe_photo = req.file.filename
-        } else {
-            errors.push('No file uploaded')
-        }        
+        if(!recipe_photo){
+            recipe_photo = null
+        } 
 
         if(!recipe_name){
           errors.push('recipe_name required')

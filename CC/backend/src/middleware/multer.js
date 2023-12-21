@@ -3,7 +3,7 @@ const path = require('path')
 
 const storageRecipes = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/recipes')
+        cb(null, "null")
     },
     filename: (req, file, cb) => {
         const timestamp = new Date().getTime();
