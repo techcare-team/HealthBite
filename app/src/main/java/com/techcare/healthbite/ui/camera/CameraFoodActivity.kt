@@ -14,8 +14,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.techcare.healthbite.R
+import com.techcare.healthbite.activity.detail.DetailRecipeActivity
 import com.techcare.healthbite.databinding.ActivityCameraFoodBinding
 import com.techcare.healthbite.ml.FoodModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.IOException
@@ -103,53 +107,63 @@ class CameraFoodActivity : AppCompatActivity() {
             }
 
             val classes = arrayOf(
-                "Ayam_Crispy",
-                "Ayam_Kecap",
-                "Ayam_Serundeng",
+                "Ayam Crispy",
+                "Ayam Kecap",
+                "Ayam Serundeng",
                 "Bakso",
                 "Brownies",
-                "Bubur_Ayam",
+                "Bubur Ayam",
                 "Capcay",
-                "Cumi_Bakar",
-                "Cumi_Hitam",
-                "Cumi_Rica",
-                "Dimsum_Ikan",
-                "Garang_Asem",
-                "Ikan_Bakar",
-                "Ikan_Goreng",
-                "Kentang_Balado",
-                "Kue_Bolu",
-                "Nasi_Bakar",
-                "Nasi_Goreng",
-                "Nasi_Kuning",
-                "Nasi_Merah",
-                "Nasi_Rames",
-                "Opor_Ayam",
+                "Cumi Bakar",
+                "Cumi Hitam",
+                "Cumi Rica",
+                "Dimsum Ikan",
+                "Garang Asem",
+                "Ikan Bakar",
+                "Ikan Goreng",
+                "Kentang Balado",
+                "Kue Bolu",
+                "Nasi Bakar",
+                "Nasi Goreng",
+                "Nasi Kuning",
+                "Nasi Merah",
+                "Nasi Rames",
+                "Opor Ayam",
                 "Pancake",
                 "Pecel",
-                "Pepes_Ikan",
-                "Perkedel_Kentang",
+                "Pepes Ikan",
+                "Perkedel Kentang",
                 "Pukis",
                 "Rawon",
                 "Rendang",
-                "Salad_Sayur",
-                "Sate_Ayam",
-                "Sate_Kambing",
-                "Sayur_Asem",
-                "Sayur_Sop",
-                "Soto_Ayam",
-                "Telur_Balado",
-                "Telur_Dadar",
-                "Tumis_Kacang_Panjang_Tahu",
-                "Tumis_Kangkung",
-                "Tumis_Terong",
-                "Udang_Asam_Manis",
-                "Udang_Goreng_Tepung"
+                "Salad Sayur",
+                "Sate Ayam",
+                "Sate Kambing",
+                "Sayur Asem",
+                "Sayur Sop",
+                "Soto Ayam",
+                "Telur Balado",
+                "Telur Dadar",
+                "Tumis Kacang Panjang Tahu",
+                "Tumis Kangkung",
+                "Tumis Terong",
+                "Udang Asam Manis",
+                "Udang Goreng Tepung"
             )
 
             binding.result.text = classes[maxPos]
 
+            val detectedFood = classes[maxPos].toString()
+
             model.close()
+
+            val intent = Intent(this, DetailRecipeActivity::class.java)
+            intent.putExtra(EXTRA_FOODNAME, detectedFood)
+            GlobalScope.launch {
+                delay(1500)
+                startActivity(intent)
+            }
+
         } catch (e: IOException) {
             e.printStackTrace()
             showToast("Error processing image.")
@@ -185,12 +199,21 @@ class CameraFoodActivity : AppCompatActivity() {
     private fun loadBitmapFromUri(uri: Uri): Bitmap {
         return try {
             val inputStream = contentResolver.openInputStream(uri)
-            BitmapFactory.decodeStream(inputStream)
+            val originalBitmap = BitmapFactory.decodeStream(inputStream)
+
+            val scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, imageSize, imageSize, false)
+
+            scaledBitmap
         } catch (e: IOException) {
             e.printStackTrace()
             showToast("Error loading image from gallery.")
             Bitmap.createBitmap(imageSize, imageSize, Bitmap.Config.ARGB_8888)
         }
     }
+
+    companion object{
+        val EXTRA_FOODNAME = "FOODNAME"
+    }
+
 
 }

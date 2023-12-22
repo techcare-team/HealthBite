@@ -16,9 +16,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthBite"
         tools:targetApi="31">
@@ -26,16 +26,7 @@
             android:name=".activity.signup.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.signup.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.detail.DetailRecipeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.camera.CameraIngredientCaptureActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.camera.CameraFoodCaptureActivity"
             android:exported="false" />
         <activity
             android:name=".ui.camera.CameraIngredientActivity"

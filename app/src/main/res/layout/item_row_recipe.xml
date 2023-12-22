@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="4dp"
-    android:layout_gravity="center"
+    android:layout_gravity="top"
     android:layout_marginStart="8dp"
     android:layout_marginTop="4dp"
     android:layout_marginEnd="8dp"
@@ -21,19 +21,18 @@
             android:id="@+id/img_food_photo"
             android:layout_width="72dp"
             android:layout_height="100dp"
-            android:layout_marginStart="2dp"
+            android:layout_marginTop="4dp"
             android:contentDescription="@string/food_photo"
             android:scaleType="centerCrop"
+            android:src="@drawable/opor_ayam"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="@+id/tv_food_name"
-            android:src="@drawable/opor_ayam" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_food_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_toEndOf="@id/img_food_photo"
             android:text="@string/food_name"
@@ -41,7 +40,7 @@
             android:textStyle="bold"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/img_food_photo"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="@+id/img_food_photo" />
 
         <TextView
             android:id="@+id/tv_food_status"
@@ -50,60 +49,43 @@
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:maxLines="5"
-            android:text="@string/food_status"
-            card_view:layout_constraintBottom_toBottomOf="@+id/img_food_photo"
+            android:text="@string/value_status"
+            android:textColor="@color/green_light"
             card_view:layout_constraintEnd_toEndOf="@+id/tv_food_name"
             card_view:layout_constraintStart_toStartOf="@+id/tv_food_name"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_food_name"
-            card_view:layout_constraintVertical_bias="0.0" />
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_food_name" />
 
         <LinearLayout
             android:id="@+id/monitor_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="6dp"
             android:orientation="horizontal"
             card_view:layout_constraintStart_toStartOf="@+id/tv_food_status"
             card_view:layout_constraintTop_toBottomOf="@+id/tv_food_status">
 
             <TextView
                 android:id="@+id/tm_cal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:text="@string/calories"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                style="@style/MonitorLabel"
+                android:text="@string/calories" />
 
             <TextView
                 android:id="@+id/tm_glu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonitorLabel"
                 android:layout_marginStart="32dp"
-                android:gravity="start"
-                android:text="@string/sugar"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                android:text="@string/sugar" />
 
             <TextView
                 android:id="@+id/tm_chol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonitorLabel"
                 android:layout_marginStart="32dp"
-                android:gravity="start"
-                android:text="@string/cholesterol"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                android:text="@string/cholesterol" />
 
             <TextView
                 android:id="@+id/tm_nat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonitorLabel"
                 android:layout_marginStart="32dp"
-                android:gravity="start"
-                android:text="@string/natrium"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                android:text="@string/natrium" />
         </LinearLayout>
 
         <LinearLayout
@@ -117,52 +99,41 @@
 
             <TextView
                 android:id="@+id/vm_cal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="start"
+                style="@style/MonitorValue"
                 android:text="@string/calories"
-                android:textSize="14sp"
-                android:textStyle="normal" />
-
+                card_view:layout_constraintTop_toBottomOf="@+id/tm_cal" />
 
             <TextView
                 android:id="@+id/vm_glu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonitorValue"
                 android:layout_marginStart="32dp"
-                android:gravity="start"
                 android:text="@string/sugar"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                card_view:layout_constraintTop_toBottomOf="@+id/tm_glu" />
 
             <TextView
                 android:id="@+id/vm_chol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonitorValue"
                 android:layout_marginStart="32dp"
-                android:gravity="start"
                 android:text="@string/cholesterol"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                card_view:layout_constraintTop_toBottomOf="@+id/tm_chol" />
 
             <TextView
                 android:id="@+id/vm_nat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/MonitorValue"
                 android:layout_marginStart="32dp"
-                android:gravity="start"
                 android:text="@string/natrium"
-                android:textSize="14sp"
-                android:textStyle="normal" />
+                card_view:layout_constraintTop_toBottomOf="@+id/tm_nat" />
         </LinearLayout>
 
+
         <Button
+            android:id="@+id/btn_add_meal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:text="@string/add_food_to_consume"
             card_view:layout_constraintStart_toStartOf="@+id/value_monitor_item"
-            card_view:layout_constraintTop_toBottomOf="@+id/value_monitor_item"
-            android:text="@string/add_food_to_consume">
+            card_view:layout_constraintTop_toBottomOf="@+id/value_monitor_item">
 
         </Button>
     </androidx.constraintlayout.widget.ConstraintLayout>

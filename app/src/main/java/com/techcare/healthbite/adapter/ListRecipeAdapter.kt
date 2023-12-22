@@ -1,16 +1,13 @@
 package com.techcare.healthbite.adapter
 
 
+import android.content.Intent
 import android.view.LayoutInflater
-
 import android.view.ViewGroup
-import android.widget.ImageView
-
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-
+import com.techcare.healthbite.activity.detail.DetailRecipeActivity
 import com.techcare.healthbite.databinding.ItemRowRecipeBinding
 import com.techcare.healthbite.response.DataItem
 
@@ -28,12 +25,11 @@ class ListRecipeAdapter : androidx.recyclerview.widget.ListAdapter<DataItem, Lis
     class RecipeViewHolder (private val binding: ItemRowRecipeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: DataItem){
 
-
+            val getId = recipe.recipeId
             binding.apply {
 
                 Glide.with(binding.root.context)
                     .load(recipe.recipePhoto)
-                    .apply(RequestOptions.circleCropTransform())
                     .into(imgFoodPhoto)
                 tvFoodName.text = recipe.recipeName
                 vmCal.text = recipe.caloriesValue.toString()
@@ -41,15 +37,19 @@ class ListRecipeAdapter : androidx.recyclerview.widget.ListAdapter<DataItem, Lis
                 vmChol.text = recipe.cholesterolValue.toString()
                 vmNat.text = recipe.natriumValue.toString()
 
+
+                root.setOnClickListener {
+                    val intent = Intent(binding.root.context, DetailRecipeActivity::class.java)
+                    intent.putExtra(EXTRA_ID, getId)
+                    binding.root.context.startActivity(intent)
+                }
+
             }
+
         }
     }
 
-
-
     companion object {
-        const val EXTRA_USERNAME = "USERNAME"
-        const val EXTRA_AVATAR = "AVATAR"
         const val EXTRA_ID = "ID"
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataItem>() {
             override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {

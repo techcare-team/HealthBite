@@ -13,6 +13,17 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/btn_back"
+                android:contentDescription="@string/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+
+            <ImageView
+                android:id="@+id/img_food_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
@@ -21,6 +32,7 @@
         </FrameLayout>
 
         <TextView
+            android:id="@+id/food_name"
             style="@style/TextContent.TitleMedium.Bold.MarginLeftRight"
             android:layout_marginBottom="6dp"
             android:layout_marginTop="12dp"
@@ -28,45 +40,53 @@
             android:textSize="20sp"/>
 
         <TextView
+            android:id="@+id/food_description"
             style="@style/TextContent.BodyMedium.Gray.MarginLeftRight"
             android:layout_marginBottom="18dp"
             android:lineSpacingMultiplier="1"
             android:text="@string/food_description" />
 
         <TextView
+            android:id="@+id/title_ingredient"
             style="@style/TextContent.TitleMedium.Bold.MarginLeftRight"
             android:layout_marginBottom="6dp"
             android:text="@string/title_ingredient" />
 
         <TextView
+            android:id="@+id/ingredient_content"
             style="@style/TextContent.BodyMedium.Gray.MarginLeftRight"
             android:layout_marginBottom="18dp"
             android:lineSpacingMultiplier="1"
             android:text="@string/ingredient_content" />
 
         <TextView
+            android:id="@+id/title_cook_method"
             style="@style/TextContent.TitleMedium.Bold.MarginLeftRight"
             android:layout_marginBottom="6dp"
             android:text="@string/title_cook_method" />
 
         <TextView
+            android:id="@+id/cook_method_content"
             style="@style/TextContent.BodyMedium.Gray.MarginLeftRight"
             android:layout_marginBottom="18dp"
             android:lineSpacingMultiplier="1"
             android:text="@string/cook_method_content" />
 
         <TextView
+            android:id="@+id/title_nutrition"
             style="@style/TextContent.TitleMedium.Bold.MarginLeftRight"
             android:layout_marginBottom="6dp"
             android:text="@string/title_nutrition" />
 
         <TextView
+            android:id="@+id/content_nutrition"
             style="@style/TextContent.BodyMedium.Gray.MarginLeftRight"
             android:layout_marginBottom="18dp"
             android:lineSpacingMultiplier="1"
-            android:text="@string/content_title" />
+            android:text="@string/content_nutrition" />
 
         <Button
+            android:id="@+id/btn_add_consumtion"
             style="@style/ButtonGeneral.SecondaryVariant"
             android:text="@string/add_diary_consumtion"
             android:textStyle="bold"

@@ -43,10 +43,9 @@ class RecipeFragment : Fragment() {
 
         rvRecipe = binding.rvRecipe
 
-        recipeViewModel.listRecipe.observe(viewLifecycleOwner) { list ->
-            if (list != null) {
-                setRecipeData(list)
-            }
+
+        recipeViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
         }
 
 
@@ -57,6 +56,7 @@ class RecipeFragment : Fragment() {
             setRecipeData(list)
         }
 
+
         return root
     }
 
@@ -66,11 +66,33 @@ class RecipeFragment : Fragment() {
         val searchItem = menu.findItem(R.id.action_search)
         searchView = searchItem.actionView as SearchView
 
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Handle search query submission
+                if (query != null && query.isNotEmpty()) {
+                    performSearch(query)
+                }
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+
+                recipeViewModel.listRecipe.observe(viewLifecycleOwner) { list ->
+                    if (list != null) {
+                        setRecipeData(list)
+                    }
+                }
+                return true
+            }
+        })
+
         filterItem = menu.findItem(R.id.action_filter)
     }
 
-
-
+    private fun performSearch(query: String) {
+        recipeViewModel.findRecipeBySearch(query)
+    }
 
     private fun setRecipeData(listUser: List<DataItem>) {
         val adapter = ListRecipeAdapter()
@@ -78,15 +100,17 @@ class RecipeFragment : Fragment() {
         binding.rvRecipe.adapter = adapter
     }
 
+    private fun showLoading(state: Boolean) { binding.progressBar.visibility = if (state) View.VISIBLE else View.GONE }
+
 
     private fun ifUserNotFound(isDataNotFound: Boolean) {
         binding.apply {
             if (isDataNotFound) {
                 rvRecipe.visibility = View.GONE
-//                tvNotFound.visibility = View.VISIBLE
+                tvNotFound.visibility = View.VISIBLE
             } else {
                 rvRecipe.visibility = View.VISIBLE
-//                tvNotFound.visibility = View.GONE
+                tvNotFound.visibility = View.GONE
             }
         }
     }
